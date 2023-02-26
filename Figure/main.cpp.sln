@@ -1,6 +1,6 @@
-#include "Figure.h";
 #include <iostream>;
 #include <cmath>;
+#include "Figure.h";
 
 using namespace std;
 
