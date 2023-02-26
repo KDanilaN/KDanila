@@ -7,30 +7,24 @@ using namespace std;
 int main()
 {
     setlocale(LC_ALL, "ru");
-
     Circle mas[3]{
         Circle (0, 0, 0),
         Circle (0, 0, 0),
         Circle (0, 0, 0)
     };
-
     float r, x, y;
     float r2, x2, y2;
     double a, b, c;
-
     for (int i = 0; i < 3; i++) {
         cout << "Vvedite r, x и y u kruga № " << i + 1 << " probel: " << endl;
         cin >> r >> x >> y;
         mas[i].set_circle(r, x, y);
         cout << "krugu № " << i + 1 << " radius r = " << r << " i koordinati centra x = " << x << " и y = " << y << endl << endl;
     }
-
     cout << "Vvedite a, b и cdlya treug.: " << endl;
     cin >> a >> b >> c;
-
     cout << "Vvedite r2, x2 и y2 dlya kruga CIRCLE  circle_check: " << endl;
     cin >> r2 >> x2 >> y2;
-
     for (int i = 0; i < 3; i++) {
         cout << Krug №" << i + 1 << ":" << endl;
         mas[i].show();
@@ -39,7 +33,6 @@ int main()
         cout << "Krug vpisan d treug.: " << mas[i].triangle_in(a, b, c) << endl;
         cout << "peresekaets'a c krugom CIRCLE: " << mas[i].circle_check(r2, x2, y2) << endl;
         cout << endl;
-
     }
     return 0;
 }
