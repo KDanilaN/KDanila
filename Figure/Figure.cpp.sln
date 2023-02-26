@@ -1,31 +1,43 @@
-﻿
-Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.5.33414.496
-MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Figure.cpp", "Figure.cpp\Figure.cpp.vcxproj", "{E9238C60-9631-4A72-A424-7BE55DF2F715}"
-EndProject
-Global
-	GlobalSection(SolutionConfigurationPlatforms) = preSolution
-		Debug|x64 = Debug|x64
-		Debug|x86 = Debug|x86
-		Release|x64 = Release|x64
-		Release|x86 = Release|x86
-	EndGlobalSection
-	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{E9238C60-9631-4A72-A424-7BE55DF2F715}.Debug|x64.ActiveCfg = Debug|x64
-		{E9238C60-9631-4A72-A424-7BE55DF2F715}.Debug|x64.Build.0 = Debug|x64
-		{E9238C60-9631-4A72-A424-7BE55DF2F715}.Debug|x86.ActiveCfg = Debug|Win32
-		{E9238C60-9631-4A72-A424-7BE55DF2F715}.Debug|x86.Build.0 = Debug|Win32
-		{E9238C60-9631-4A72-A424-7BE55DF2F715}.Release|x64.ActiveCfg = Release|x64
-		{E9238C60-9631-4A72-A424-7BE55DF2F715}.Release|x64.Build.0 = Release|x64
-		{E9238C60-9631-4A72-A424-7BE55DF2F715}.Release|x86.ActiveCfg = Release|Win32
-		{E9238C60-9631-4A72-A424-7BE55DF2F715}.Release|x86.Build.0 = Release|Win32
-	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {2CA4B349-B2D8-4D49-A2CD-F3C22B8F20C0}
-	EndGlobalSection
-EndGlobal
+#include "Figure.h"
+#include <cmath>
+#include <iostream>
+using namespace std;
+
+void Figure::figure(float x1, float x2, float x3, float x4, float y1, float y2, float y3, float y4)
+{
+    a = sqrt((pow((x1 - x4), 2) + pow((y1 - y4), 2)));
+    b = sqrt((pow((x1 - x2), 2) + pow((y1 - y2), 2)));
+    c = sqrt((pow((x2 - x3), 2) + pow((y2 - y3), 2)));
+    d = sqrt((pow((x3 - x4), 2) + pow((y3 - y4), 2)));
+    d1 = pow((x1 - x3), 2) + pow((y1 - y3), 2);
+    d2 = pow((x2 - x4), 2) + pow((y2 - y4), 2);
+    cos = ((((x3 - x1) * (x4 - x2)) + ((y3 - y1) * (y4 - y2))) / ((sqrt((pow((x1 + x3), 2)) + pow((y1 + y3), 2))) + (sqrt((pow((x2 + x4), 2)) + pow((y2 + y4), 2)))));
+    sin = sqrt((1 - pow((cos), 2)));
+    S = (sqrt(d1 * d2) * sin) / 2;
+    P = a + b + c + d;
+}
+void Figure::show()
+{
+    cout << a << " " << b << " " << c << " " << d << endl;
+    cout << P << " " << S;
+}
+bool Figure::is_prug()
+{
+    return (a == c) && (b == d) && (d1 == d2);
+}
+bool Figure::is_square()
+{
+    return (a == b) && (b == c) && (c == d) && (d1 == d2);
+}
+bool Figure::is_romb()
+{
+    return (a == b) && (b == c) && (c == d);
+}
+bool Figure::is_in_circle()
+{
+    return sqrt((d1 * d2)) == (a * c + b * d);
+}
+bool Figure::is_out_circle()
+{
+    return a + b == c + d;
+}
