@@ -1,28 +1,45 @@
-#include <iostream>
-#include "Circle.h"
+#include "Circle.h";
+#include <iostream>;
+#include <cmath>;
 
 using namespace std;
 
-int main() {
-    Circle mas[3];
-    float radius, x_center, y_center;
-    for (int i = 0; i < 3; i++) {
-        cout << "Enter radius, x_center and y_center for circle #" << i + 1 << " through space: " << endl;
-        cin >> radius >> x_center >> y_center;
-        mas[i].set_circle(radius, x_center, y_center);
-    }
+int main()
+{
+    setlocale(LC_ALL, "ru");
 
-    for (int i = 0; i < 3; i++) {
-        cout << "Square for circle #" << i + 1 << ": " << mas[i].square() << endl;
-        cout << "Ìîæíî ëè îïèñàòü òðåóãîëüíèê ó " << i + 1 << " îêðóæíîñòè? " << mas[i].triangle_around(radius, x_center, y_center) << endl;
-        cout << "Ìîæíî ëè âïèñàòü òðåóãîëüíèê â " << i + 1 << " îêðóæíîñòü? " << mas[i].triangle_in(radius, x_center, y_center) << endl;
+    Circle mas[3]{
+        Circle (0, 0, 0),
+        Circle (0, 0, 0),
+        Circle (0, 0, 0)
+    };
 
-    }
-
+    float r, x, y;
     float r2, x2, y2;
-    cout << "Íàïèøèòå ðàäèóñ, x è y öåíòðà îêðóæíîñòè êîòîðóþ õîòèòå ïðîâåðèòü íà ïåðåñå÷åíèå: " << endl;
-    cin >> r2 >> x2 >> y2;
-    for (auto& ma : mas) {
-        cout << "Èìåþòñÿ ëè òî÷êè ïåðåñå÷åíèÿ? " << ma.check_circle(r2, x2, y2) << endl;
+    double a, b, c;
+
+    for (int i = 0; i < 3; i++) {
+        cout << "Vvedite r, x и y u kruga № " << i + 1 << " probel: " << endl;
+        cin >> r >> x >> y;
+        mas[i].set_circle(r, x, y);
+        cout << "krugu № " << i + 1 << " radius r = " << r << " i koordinati centra x = " << x << " и y = " << y << endl << endl;
     }
+
+    cout << "Vvedite a, b и cdlya treug.: " << endl;
+    cin >> a >> b >> c;
+
+    cout << "Vvedite r2, x2 и y2 dlya kruga CIRCLE  circle_check: " << endl;
+    cin >> r2 >> x2 >> y2;
+
+    for (int i = 0; i < 3; i++) {
+        cout << Krug №" << i + 1 << ":" << endl;
+        mas[i].show();
+        cout << "Square: " << mas[i].square() << endl;
+        cout << "Krug opisan vokrug treug.: " << mas[i].triangle_around(a, b, c) << endl;
+        cout << "Krug vpisan d treug.: " << mas[i].triangle_in(a, b, c) << endl;
+        cout << "peresekaets'a c krugom CIRCLE: " << mas[i].circle_check(r2, x2, y2) << endl;
+        cout << endl;
+
+    }
+    return 0;
 }
