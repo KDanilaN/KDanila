@@ -1,0 +1,39 @@
+#include <Windows.h> 
+#include <string>
+#include "SoftwareDefinitions.h"
+#include <fstream>
+#include <iostream>
+
+using namespace std;
+
+
+int WINAPI WinMain(HINSTANCE hInst, HINSTANCE hPrevInst, LPSTR args, int ncmdshow) {
+
+	WNDCLASS SoftWareMainClass = NewWindowClass((HBRUSH)COLOR_WINDOW, LoadCursor(NULL, IDC_ARROW), hInst, LoadIcon(NULL, IDI_QUESTION),
+		L"MainWndClass", SoftwareMainProcedure);
+
+	if (!RegisterClassW(&SoftWareMainClass)) { return -1; }
+	MSG SoftwareMainMessage = { 0 };
+
+	CreateWindow(L"MainWndClass", L"DKAudioTeka", WS_OVERLAPPEDWINDOW | WS_VISIBLE, 100, 100, 500, 250, NULL, NULL, NULL, NULL);
+
+	while (GetMessage(&SoftwareMainMessage, NULL, NULL, NULL)) {
+		TranslateMessage(&SoftwareMainMessage);
+		DispatchMessage(&SoftwareMainMessage);
+	}
+	return 0;
+
+}
+
+WNDCLASS NewWindowClass(HBRUSH BGColor, HCURSOR Cursor, HINSTANCE hInst, HICON Icon, LPCWSTR Name, WNDPROC Procedure) {
+	WNDCLASS NWC = { 0 };
+
+	NWC.hIcon = Icon;
+	NWC.hCursor = Cursor;
+	NWC.hInstance = hInst;
+	NWC.lpszClassName = Name;
+	NWC.hbrBackground = (HBRUSH)(COLOR_WINDOW + 23);
+	NWC.lpfnWndProc = Procedure;
+
+	return NWC;
+}
