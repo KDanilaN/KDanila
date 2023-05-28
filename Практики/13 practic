@@ -1,0 +1,37 @@
+LRESULT CALLBACK SoftwareMainProcedure(HWND hWnd, UINT msg, WPARAM wp, LPARAM lp) {
+
+	switch (msg)
+	{
+	case WM_COMMAND:
+		switch (wp) {
+		case OnClearField:
+			SetWindowTextA(hEditControl, "");
+			break;
+		case OnReadField:
+			GetWindowTextA(hEditControl, Buffer, TextBufferSize);
+			SearchSong(hWnd);
+			break;
+		case OnSaveFile:
+			if (GetSaveFileNameA(&ofn)) { SaveData(filename); }
+			break;
+		case OnLoadFile:
+			if (GetOpenFileNameA(&ofn)) { LoadData(filename); }
+			break;
+		case OnExitSoftware:
+			PostQuitMessage(0);
+			break;
+		default: break;
+		}
+		break;
+	case WM_CREATE:
+		MainWndAddMenus(hWnd);
+		MainWndAddWidgets(hWnd);
+		SetOpenFileParams(hWnd);
+		break;
+	case WM_DESTROY:
+		PostQuitMessage(0);
+		break;
+
+	default: return DefWindowProc(hWnd, msg, wp, lp);
+	}
+}
