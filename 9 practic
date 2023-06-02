@@ -1,0 +1,110 @@
+#include <iostream>
+
+using namespace std;
+
+template <class T> void Swap(T& x, T& y) {
+    T z = x;
+    x = y;
+    y = z;
+}
+template <class T> void OutXY(T& x, T& y) {
+    cout << x << " " << y << "\n";
+}
+class My_class {
+    int a;
+    float b;
+public:
+    My_class(int a, float b) {
+        this->a = a;
+        this->b = b;
+    }
+    void Out() {
+        cout << a << " " << b << "\n";
+    }
+    My_class operator = (My_class& T) {
+        a = T.a;
+        b = T.b;
+        return *this;
+    }
+};
+
+int main() {
+    int x = 1;
+    int y = 2;
+    cout << "Pered obmenom (celie)\n";
+    OutXY(x, y);
+    Swap(x, y);
+    cout << "Posle obmena\n";
+    OutXY(x, y);
+    float x1 = 1.5;
+    float y1 = 5.9;
+    cout << "Pered obmenom (float)\n";
+    OutXY(x1, y1);
+    Swap(x1, y1);
+    cout << "Posle obmena \n";
+    OutXY(x1, y1);
+    My_class t1(1, 1.5), t2(2, 9.9);
+    cout << "Pered obmenom (classes)\n";
+    t1.Out();
+    t2.Out();
+    Swap(t1, t2);
+    cout << "Posle obmena\n";
+    t1.Out();
+    t2.Out();
+    return 0;
+}
+
+// 9.1 задание
+
+template<typename T>
+void swap(T& a, T& b) {
+    T temp = std::move(a);
+    a = std::move(b);
+    b = std::move(temp);
+}
+
+// 9.2 задание 
+
+#include <iostream>
+#include <string>
+#include <vector>
+#include <algorithm>
+
+template<typename T>
+void sortArray(std::vector<T>& arr)
+{
+    std::sort(arr.begin(), arr.end());
+}
+
+template<>
+void sortArray<std::string>(std::vector<std::string>& arr)
+{
+    std::sort(arr.begin(), arr.end(), [](const std::string& a, const std::string& b) {
+        return a.substr(a.find_last_of(' ') + 1) < b.substr(b.find_last_of(' ') + 1);
+        });
+}
+
+int main()
+{
+    std::vector<int> intArr = { 3, 107, 49, 13, 25, 95, 2, 62, 5 };
+    std::vector<double> doubleArr = { 3.64, 2.43, 1.87, 1.61 };
+    std::vector<std::string> stringArr = { "Grupp", "Lesson", "Programm", "Plan" };
+
+    sortArray(intArr);
+    sortArray(doubleArr);
+    sortArray(stringArr);
+
+    for (const auto& i : intArr)
+        std::cout << i << " ";
+    std::cout << std::endl;
+
+    for (const auto& d : doubleArr)
+        std::cout << d << " ";
+    std::cout << std::endl;
+
+    for (const auto& s : stringArr)
+        std::cout << s << " ";
+    std::cout << std::endl;
+
+    return 0;
+}
